@@ -1,16 +1,12 @@
-import { ModeToggle } from "./components/ModeToggle"
-import { ThemeProvider } from "./context/ThemeProvider"
+import { ModeToggle } from "@/components/ModeToggle";
 
 function App() {
-
   return (
     <>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <h1 className="text-3xl">Potter App</h1>
-        <ModeToggle/>
-      </ThemeProvider>
+        <ModeToggle />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
