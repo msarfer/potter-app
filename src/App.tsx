@@ -1,10 +1,9 @@
-import { ModeToggle } from "@/components/ModeToggle";
+import { Navbar } from "./components/Navbar";
 
 function App() {
   return (
     <>
-        <h1 className="text-3xl">Potter App</h1>
-        <ModeToggle />
+      <Navbar/>
     </>
   );
 }
