@@ -1,0 +1,46 @@
+[
+  {
+    "house": "Gryffindor",
+    "emoji": "🦁",
+    "founder": "Godric Gryffindor",
+    "colors": [
+      "red",
+      "gold"
+    ],
+    "animal": "León",
+    "index": 0
+  },
+  {
+    "house": "Hufflepuff",
+    "emoji": "🦡",
+    "founder": "Helga Hufflepuff",
+    "colors": [
+      "yellow",
+      "black"
+    ],
+    "animal": "Tejón",
+    "index": 1
+  },
+  {
+    "house": "Ravenclaw",
+    "emoji": "🦅",
+    "founder": "Rowena Ravenclaw",
+    "colors": [
+      "blue",
+      "yellow"
+    ],
+    "animal": "Cuervo",
+    "index": 2
+  },
+  {
+    "house": "Slytherin",
+    "emoji": "🐍",
+    "founder": "Salazar Slytherin",
+    "colors": [
+      "green",
+      "silver"
+    ],
+    "animal": "Serpiente",
+    "index": 3
+  }
+]
