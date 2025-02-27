@@ -1,0 +1,12 @@
+{
+  "navbar.link.books": "Libros",
+  "navbar.link.characters": "Personajes",
+  "navbar.link.spells": "Hechizos",
+  "navbar.link.houses": "Casas",
+  "navbar.link.dashboard": "Dashboard",
+  "navbar.link.signin": "Iniciar Sesión",
+  "navbar.link.signup": "Registrarse",
+  "navbar.link.logout": "Cerrar Sesión",
+  "app.lang.en": "Inglés",
+  "app.lang.es": "Español"
+}

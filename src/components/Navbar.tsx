@@ -1,6 +1,8 @@
 import { ModeToggle } from "@/components/ModeToggle";
 import { WandSparkles } from "lucide-react";
+import { FormattedMessage } from "react-intl";
 import { NavLink } from "react-router-dom";
+import { LanguageSelector } from "./LanguageSelector";
 
 interface Element {
   path: string;
@@ -9,10 +11,11 @@ interface Element {
 }
 
 const elements: Element[] = [
-  { path: "/books", name: "Books" },
-  { path: "/characters", name: "Characters" },
-  { path: "/spells", name: "Spells" },
-  { path: "/dashboard", name: "Dashboard" },
+  { path: "/books", name: "books" },
+  { path: "/characters", name: "characters" },
+  { path: "/spells", name: "spells" },
+  { path: "/houses", name: "houses" },
+  { path: "/dashboard", name: "dashboard" },
 ];
 
 const NavElement = ({ path, name }: Element) => {
@@ -21,7 +24,7 @@ const NavElement = ({ path, name }: Element) => {
       to={`${path}`}
       className={({isActive}) => `group pointer inline-flex h-9 w-max items-center justify-center px-4 py-2 text-sm font-medium hover:underline focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50 dark:data-[active]:bg-gray-800/50 dark:data-[state=open]:bg-gray-800/50 ${isActive ? 'underline': ''}`}
     >
-      {name}
+      <FormattedMessage id={`navbar.link.${name}`}/>
     </NavLink>
   );
 };
@@ -38,6 +41,7 @@ export function Navbar() {
           <NavElement key={index + path} path={path} name={name} />
         ))}
         <ModeToggle />
+        <LanguageSelector />
       </nav>
     </header>
   );

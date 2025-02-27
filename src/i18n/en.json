@@ -1,0 +1,12 @@
+{
+  "navbar.link.books": "Books",
+  "navbar.link.characters": "Characters",
+  "navbar.link.spells": "Spells",
+  "navbar.link.houses": "Houses",
+  "navbar.link.dashboard": "Dashboard",
+  "navbar.link.signin": "Sign In",
+  "navbar.link.signup": "Sign Up",
+  "navbar.link.logout": "Log Out",
+  "app.lang.en": "English",
+  "app.lang.es": "Spanish"
+}
