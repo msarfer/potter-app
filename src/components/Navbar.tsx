@@ -31,7 +31,7 @@ const NavElement = ({ path, name }: Element) => {
 
 export function Navbar() {
   return (
-    <header className="flex h-1/10 w-full shrink-0 items-center px-4 border border-b-1">
+    <header className="flex h-1/10 w-full shrink-0 items-center px-4 border-b-1">
       <NavLink to="/" className="mr-6 flex text-2xl">
         <WandSparkles className="h-8 w-8 mr-3" />
         <h1 className="">Potter App</h1>

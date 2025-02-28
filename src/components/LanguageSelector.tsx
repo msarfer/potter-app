@@ -23,7 +23,7 @@ export function LanguageSelector() {
       <DropdownMenuContent align="end">
         {
           languages.map((locale) => (
-            <DropdownMenuItem onClick={() => changeLanguage(locale)}>
+            <DropdownMenuItem key={locale} onClick={() => changeLanguage(locale)}>
               <FormattedMessage id={`app.lang.${locale}`}/>
             </DropdownMenuItem>
 

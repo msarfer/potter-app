@@ -10,7 +10,7 @@ function App() {
   return (
     <main className="h-screen w-screen">
       <Navbar/>
-      <section className="h-9/10 w-screen p-4 box-border">
+      <section className="h-9/10 w-screen p-10 box-border">
         <Routes>
           <Route index element={<HomePage/>} />
           <Route path="/books" element={<BooksPage/>} />

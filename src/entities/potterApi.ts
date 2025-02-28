@@ -1,4 +1,4 @@
-export interface Book {
+export interface BookInterface {
   number:        number;
   title:         string;
   originalTitle: string;
@@ -9,7 +9,7 @@ export interface Book {
   index:         number;
 }
 
-export interface Character {
+export interface CharacterInterface {
   fullName:      string;
   nickname:      string;
   hogwartsHouse: HogwartsHouse;
@@ -20,7 +20,7 @@ export interface Character {
   index:         number;
 }
 
-export interface House {
+export interface HouseInterface {
   house:   HogwartsHouse;
   emoji:   string;
   founder: string;
@@ -36,7 +36,7 @@ export enum HogwartsHouse {
   SLYTHERIN = "Slytherin",
 }
 
-export interface Spell {
+export interface SpellInterface {
   spell: string;
   use:   string;
   index: number;
