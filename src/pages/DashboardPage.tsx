@@ -2,6 +2,9 @@ import { RolSelector } from "@/components/RolSelector";
 import { fetchUsers } from "@/store/features/users/usersSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRtk";
 import { useEffect } from "react";
+import { removeUser } from "@/services/firebase";
+import { Button } from "@/components/ui/button";
+import { Cross, Trash } from "lucide-react";
 
 export default function DashboardPage() {
   const { users } = useAppSelector((state) => state.users);
@@ -10,6 +13,11 @@ export default function DashboardPage() {
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);
+
+  const handleRemove = async (id: string) => {
+    await removeUser(id);
+    dispatch(fetchUsers());
+  };
 
   return (
     <div>
@@ -37,8 +45,11 @@ export default function DashboardPage() {
                     ))}
                   </div>
                 </td>
-                <td className="p-5">
+                <td className="p-5 flex flex-row gap-1">
                   <RolSelector user={user} initActiveRoles={activeRoles}/>
+                  <Button className="hover:cursor-pointer hover:text-red-200" onClick={() => handleRemove(user.id)}>
+                    <Trash/>
+                  </Button>
                 </td>
               </tr>
             );

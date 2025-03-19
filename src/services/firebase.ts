@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { getApps, initializeApp } from "firebase/app";
-import { getDatabase, ref, update } from "firebase/database";
+import { getDatabase, ref, remove, update } from "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -21,4 +21,9 @@ export const db = getDatabase(app);
 export const updateRoles = async (id, roles) => {
   const rolesRef = ref(db,  `users/${id}/roles`)
   await update(rolesRef, roles)
+}
+
+export const removeUser = async (id) => {
+  const userRef = ref(db, `users/${id}`)
+  await remove(userRef)
 }
