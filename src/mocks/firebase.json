@@ -1,0 +1,15 @@
+{
+  "users": {
+    "Q5Kr4mUCS7fOQkcIoqEmKiBWhxH2": {
+      "email": "msarfer@ua.es",
+      "roles": {
+        "ADMIN": true,
+        "USER": false
+      },
+      "books": [],
+      "characters": [],
+      "spells": [],
+      "house": ""
+    }
+  }
+}

@@ -1,22 +1,29 @@
-import { Route, Routes } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
-import HomePage from "@/pages/HomePage";
+import AdminRoute from "@/components/routes/AdminRoute";
+import ProtectedRoute from "@/components/routes/ProtectedRoute";
 import BooksPage from "@/pages/BooksPage";
 import CharactersPage from "@/pages/CharactersPage";
-import SpellsPage from "./pages/SpellsPage";
-import DashboardPage from "./pages/DashboardPage";
+import DashboardPage from "@/pages/DashboardPage";
+import HomePage from "@/pages/HomePage";
+import SpellsPage from "@/pages/SpellsPage";
+import { Route, Routes } from "react-router-dom";
+import LoginPage from "@/pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
     <main className="h-screen w-screen">
       <Navbar/>
-      <section className="h-9/10 w-screen p-10 box-border">
+      <section className="h-9/10 w-full p-10 box-border scroll-smooth overflow-auto">
         <Routes>
           <Route index element={<HomePage/>} />
-          <Route path="/books" element={<BooksPage/>} />
-          <Route path="/characters" element={<CharactersPage/>} />
-          <Route path="/spells" element={<SpellsPage/>} />
-          <Route path="/dashboard" element={<DashboardPage/>} />
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/signup" element={<RegisterPage/>} />
+          <Route path="/books" element={<ProtectedRoute><BooksPage/></ProtectedRoute>} />
+          <Route path="/characters" element={<ProtectedRoute><CharactersPage/></ProtectedRoute>} />
+          <Route path="/spells" element={<ProtectedRoute><SpellsPage/></ProtectedRoute>} />
+          <Route path="/houses" element={<ProtectedRoute><BooksPage/></ProtectedRoute>} />
+          <Route path="/dashboard" element={<AdminRoute><DashboardPage/></AdminRoute>} />
         </Routes>
       </section>
     </main>

@@ -8,5 +8,9 @@
   "navbar.link.signup": "Registrarse",
   "navbar.link.logout": "Cerrar Sesión",
   "app.lang.en": "Inglés",
-  "app.lang.es": "Español"
+  "app.lang.es": "Español",
+  "app.signup.msg": "Introduce las credenciales con las que te quieres registrar",
+  "app.login.msg": "Introduce las credenciales con las que quieres iniciar sesión",
+  "app.login.notAccount": "¿No tienes cuenta?"
+
 }
