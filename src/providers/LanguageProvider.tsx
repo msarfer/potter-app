@@ -1,6 +1,6 @@
-import esMessages from "@/i18n/es.json";
 import enMessages from "@/i18n/en.json";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import esMessages from "@/i18n/es.json";
+import { createContext, ReactNode, useState } from "react";
 import { IntlProvider } from "react-intl";
 
 interface LanguageContextProps {
