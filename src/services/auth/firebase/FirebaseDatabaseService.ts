@@ -2,7 +2,6 @@ import { get, getDatabase, ref, set } from "firebase/database";
 import { Rol } from "@/services/auth/AuthServiceInterface";
 import UserDatabaseServiceInterface from "@/services/auth/UserDatabaseServiceInterface";
 import { app } from "@/services/firebase";
-import { UserEntry } from "@/entities/entities";
 
 export class FirebaseDatabaseService implements UserDatabaseServiceInterface {
   constructor() {

@@ -1,6 +1,6 @@
 import { BookInterface } from "@/entities/potterApi";
 import { VITE_POTTER_BASE } from "@/services/config";
-import { fetchFavs } from "@/services/firebase";
+import { fetchFavs, updateFavs } from "@/services/firebase";
 import {
   createAsyncThunk,
   createSlice,
@@ -45,26 +45,30 @@ export const fetchBooks = createAsyncThunk(
 export const fetchBooksFavs = createAsyncThunk(
   "books/fetchFavs",
   async (userId: string, { rejectWithValue }) => {
-    return fetchFavs<number[]>(
-      `users/${userId}/books`,
-      rejectWithValue
-    ).catch((error) => rejectWithValue(error.message));
+    return fetchFavs<number[]>(`users/${userId}/books`, rejectWithValue).catch(
+      (error) => rejectWithValue(error.message)
+    );
   }
 );
 
-const housesSlice = createSlice({
+interface UpdateFavsInterface {
+  userId: string;
+  favs: number[];
+}
+export const updateBooksFavs = createAsyncThunk(
+  "books/updateFavs",
+  async ({ userId, favs }: UpdateFavsInterface, { rejectWithValue }) => {
+    console.log("update favs", userId, favs);
+    return updateFavs(`users/${userId}/books`, favs, rejectWithValue).catch(
+      (error) => rejectWithValue(error.message)
+    );
+  }
+);
+
+const booksSlice = createSlice({
   name: "books",
   initialState,
   reducers: {
-    addFav: (state, action: PayloadAction<number>) => {
-      const aux = [...state.favs];
-      aux.push(action.payload);
-      state.favs = aux;
-      console.log(state.favs);
-    },
-    setFavs: (state, action: PayloadAction<number[]>) => {
-      state.favs = action.payload;
-    },
   },
   extraReducers(builder) {
     builder.addCase(fetchBooks.pending, (state) => {
@@ -93,11 +97,17 @@ const housesSlice = createSlice({
       state.loading = false;
       state.error = null;
       console.log("favs", action.payload);
-    }
+    });
+
+    builder.addCase(
+      updateBooksFavs.fulfilled,
+      (state, action: PayloadAction<number[]>) => {
+        state.favs = action.payload;
+      }
     );
   },
 });
 
-export const { addFav, setFavs } = housesSlice.actions;
+//export const {} = booksSlice.actions;
 
-export default housesSlice.reducer;
+export default booksSlice.reducer;

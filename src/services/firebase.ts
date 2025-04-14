@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { getApps, initializeApp } from "firebase/app";
-import { getDatabase, off, onValue, ref, remove, update } from "firebase/database";
+import { getDatabase, off, onValue, ref, remove, set, update } from "firebase/database";
 import { VITE_FIREBASE_API_KEY } from '@/services/config'
 
 // Your web app's Firebase configuration
@@ -54,4 +54,15 @@ export async function fetchFavs<T>(
       }
     );
   }).catch((error) => rejectWithValue(error.message));
+}
+
+export async function updateFavs(
+  path: string,
+  favs: number[],
+  rejectWithValue: (value: unknown) => Record<any, any>
+) {
+  const itemsRef = ref(db, path);
+  return set(itemsRef, favs)
+    .then(() => favs)
+    .catch((error) => rejectWithValue(error.message));
 }

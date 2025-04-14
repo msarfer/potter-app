@@ -5,9 +5,10 @@ import type { BookInterface } from "@/entities/potterApi"
 import { useAppDispatch, useAppSelector } from "@/hooks/useRtk"
 import { AuthContext } from "@/providers/AuthProvider"
 import { LanguageContext } from "@/providers/LanguageProvider"
-import { addFav, fetchBooks, fetchBooksFavs } from "@/store/features/books/booksSlice"
+import logger from "@/services/logging"
+import { fetchBooks, fetchBooksFavs, updateBooksFavs } from "@/store/features/books/booksSlice"
 import { Heart } from "lucide-react"
-import { useContext, useEffect } from "react"
+import { useCallback, useContext, useEffect } from "react"
 
 export default function BooksPage() {
   const { books, error } = useAppSelector(state => state.books)
@@ -37,8 +38,16 @@ interface BookProps {
 
 export const Book = ({ book }: BookProps) => {
   const { favs } = useAppSelector(state => state.books)
-
+  const { user } = useContext(AuthContext)
+  console.log(user.uid)
   const dispatch = useAppDispatch()
+  const handleToggleFav = useCallback(() => {
+    const newFavs = favs.includes(book.index)
+    ? favs.filter((fav) => fav !== book.index)
+    : [...favs, book.index]
+    
+    dispatch(updateBooksFavs({userId: user.uid, favs: newFavs}))
+  }, [favs])
 
   return (
     <Card className="p-0 m-0 flex flex-row overflow-hidden w-1/3">
@@ -56,7 +65,7 @@ export const Book = ({ book }: BookProps) => {
           <div className="h-1/4 pt-2">
             <h5>Publicación: <span>{book.releaseDate}</span></h5>
             <h5>Páginas: <span>{book.pages}</span></h5>
-            <Button className="cursor-pointer" onClick={() => dispatch(addFav(book.index))}>
+            <Button className="cursor-pointer" onClick={handleToggleFav}>
               <Heart fill={`${favs.includes(book.index) ? 'currentColor': 'none'}`}/>
             </Button>
           </div>

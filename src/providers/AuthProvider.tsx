@@ -3,8 +3,6 @@ import { Rol } from "@/services/auth/AuthServiceInterface"
 import logger from "@/services/logging"
 import React, { createContext, ReactNode, useEffect, useState } from "react"
 import { authService } from "../services/auth/AuthService"
-import { useDispatch } from "react-redux"
-import { setFavs } from "@/store/features/books/booksSlice"
 
 interface AuthContextProps {
   user: any | null
@@ -23,7 +21,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<any|null>(null)
   const [roles, setRoles] = useState<Rol[]|null>(null)
   const [data, setData] = useState<UserData|null>(null)
-  const dispatch = useDispatch()
   useEffect(() => {
     const unSubscribe = authService.onAuthStateChanged(async (currentUser) => {
       setUser(currentUser)
@@ -33,7 +30,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           const userData = await authService.getUserData(currentUser)
           setData(userData)
           setRoles(userRoles)
-          dispatch(setFavs(userData.books || []))
         } catch (error) {
           logger.error("Error al obtener los roles: " + error)
           setRoles(null)
