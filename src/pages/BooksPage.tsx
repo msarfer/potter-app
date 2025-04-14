@@ -5,13 +5,12 @@ import type { BookInterface } from "@/entities/potterApi"
 import { useAppDispatch, useAppSelector } from "@/hooks/useRtk"
 import { AuthContext } from "@/providers/AuthProvider"
 import { LanguageContext } from "@/providers/LanguageProvider"
-import logger from "@/services/logging"
 import { fetchBooks, fetchBooksFavs, updateBooksFavs } from "@/store/features/books/booksSlice"
 import { Heart } from "lucide-react"
 import { useCallback, useContext, useEffect } from "react"
 
 export default function BooksPage() {
-  const { books, error } = useAppSelector(state => state.books)
+  const { items: books, error } = useAppSelector(state => state.books)
   const { locale } = useContext(LanguageContext)
   const { user } = useContext(AuthContext)
   const dispatch = useAppDispatch()
@@ -26,7 +25,7 @@ export default function BooksPage() {
   return (
     <section className="flex flex-wrap justify-center w-full h-full gap-x-12 gap-y-4">
       {
-        books.map((book) => <Book key={book.index} book={book}/>)
+        books && books.map((book) => <Book key={book.index} book={book}/>)
       }
     </section>
   )
@@ -45,7 +44,7 @@ export const Book = ({ book }: BookProps) => {
     const newFavs = favs.includes(book.index)
     ? favs.filter((fav) => fav !== book.index)
     : [...favs, book.index]
-    
+
     dispatch(updateBooksFavs({userId: user.uid, favs: newFavs}))
   }, [favs])
 
