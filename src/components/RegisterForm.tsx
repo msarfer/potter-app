@@ -36,6 +36,7 @@ export function RegisterForm({
         email: userCredential.user.email,
         roles: [Rol.USER],
       });
+      await firebaseDatabaseService.restoreUserAppData(userCredential.user.uid);
       setSuccess("Registro exitoso. Redirigiendo a los libros...");
       setTimeout(() => {
         navigate("/books");

@@ -47,7 +47,7 @@ export function Navbar() {
       await authService.signOut()
       navigate('/login')
     } catch (error) {
-      logger.error("Error al cerrar sesión: ", error)
+      logger.error(`Error al cerrar sesión: ${error} `)
     }
   }
 

@@ -1,24 +1,29 @@
+import ErrorAlert from "@/components/ErrorAlert"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import type { BookInterface } from "@/entities/potterApi"
 import { useAppDispatch, useAppSelector } from "@/hooks/useRtk"
+import { AuthContext } from "@/providers/AuthProvider"
 import { LanguageContext } from "@/providers/LanguageProvider"
-import { addFav, fetchBooks } from "@/store/features/books/booksSlice"
+import { addFav, fetchBooks, fetchBooksFavs } from "@/store/features/books/booksSlice"
 import { Heart } from "lucide-react"
 import { useContext, useEffect } from "react"
 
 export default function BooksPage() {
   const { books, error } = useAppSelector(state => state.books)
   const { locale } = useContext(LanguageContext)
+  const { user } = useContext(AuthContext)
   const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    dispatch(fetchBooks(locale))
-  }, [locale])
   
+  useEffect(() => {
+    if (!user) return
+    dispatch(fetchBooks(locale))
+    dispatch(fetchBooksFavs(user.uid))
+  }, [locale])
+
+  if (error) return <ErrorAlert message={error}></ErrorAlert>
   return (
     <section className="flex flex-wrap justify-center w-full h-full gap-x-12 gap-y-4">
-      <span>{JSON.stringify(error)}</span>
       {
         books.map((book) => <Book key={book.index} book={book}/>)
       }
@@ -32,6 +37,7 @@ interface BookProps {
 
 export const Book = ({ book }: BookProps) => {
   const { favs } = useAppSelector(state => state.books)
+
   const dispatch = useAppDispatch()
 
   return (

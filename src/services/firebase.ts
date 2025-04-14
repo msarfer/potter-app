@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { getApps, initializeApp } from "firebase/app";
-import { getDatabase, ref, remove, update } from "firebase/database";
+import { getDatabase, off, onValue, ref, remove, update } from "firebase/database";
 import { VITE_FIREBASE_API_KEY } from '@/services/config'
 
 // Your web app's Firebase configuration
@@ -27,4 +27,31 @@ export const updateRoles = async (id, roles) => {
 export const removeUser = async (id) => {
   const userRef = ref(db, `users/${id}`)
   await remove(userRef)
+}
+
+export async function fetchFavs<T>(
+  path: string,
+  rejectWithValue: (value: unknown) => Record<any, any>
+): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const itemsRef = ref(db, path);
+
+    onValue(
+      itemsRef,
+      (snapshot) => {
+        const data = snapshot.val() ?? [];
+        if (data) {
+          resolve(data);
+        } else {
+          reject(new Error("No hay datos disponibles"));
+        }
+
+        off(itemsRef);
+      },
+      (error) => {
+        console.error("Error en Firebase:", error);
+        rejectWithValue(error);
+      }
+    );
+  }).catch((error) => rejectWithValue(error.message));
 }

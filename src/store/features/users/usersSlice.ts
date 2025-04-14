@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { onValue, ref, off } from "firebase/database";
 import { db } from "@/services/firebase";
+import { UserData, UserEntry } from "@/entities/entities";
 
 interface UserInterface {
   id: string
@@ -9,11 +10,13 @@ interface UserInterface {
 }
 
 interface UserState {
-  users: UserInterface[]
+  users: UserInterface[],
+  user: UserEntry | null;
 }
 
 const initialState: UserState = {
-  users: []
+  users: [],
+  user: null,
 }
 
 interface UserInfo {
@@ -49,6 +52,32 @@ export const fetchUsers = createAsyncThunk("users/fetchUsers", async (_, { rejec
   }).catch((error) => rejectWithValue(error));
 });
 
+export const fetchUserData = createAsyncThunk(
+  "users/fetchUserData",
+  async (uid: string, { rejectWithValue }) => {
+    return new Promise<UserEntry>((resolve, reject) => {
+      const itemsRef = ref(db, `users/${uid}`);
+      onValue(
+        itemsRef,
+        (snapshot) => {
+          const data = snapshot.val();
+          if (data) {
+            const user = { id: uid, ...data };
+            resolve(user);
+          } else {
+            reject(new Error("No hay datos disponibles"));
+          }
+          off(itemsRef);
+        },
+        (error) => {
+          console.error("Error en Firebase:", error);
+          rejectWithValue(error);
+        }
+      );
+    }).catch((error) => rejectWithValue(error));
+  }
+);
+
 
 export const menuSlice = createSlice({
   name: "menu",
@@ -58,6 +87,14 @@ export const menuSlice = createSlice({
     builder
       .addCase(fetchUsers.fulfilled, (state, action: PayloadAction<UserInterface[]>) => {
         state.users = action.payload;
+      })
+    
+    builder.addCase(
+      fetchUserData.fulfilled,
+      (state, action: PayloadAction<UserEntry>) => {
+        const user = action.payload;
+        state.user = user;
+        console.log("Información del usuario", user);
       })
   }
 });

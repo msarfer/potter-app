@@ -1,11 +1,12 @@
 import { BookInterface } from "@/entities/potterApi";
+import { VITE_POTTER_BASE } from "@/services/config";
+import { fetchFavs } from "@/services/firebase";
 import {
   createAsyncThunk,
   createSlice,
   PayloadAction,
   SerializedError,
 } from "@reduxjs/toolkit";
-import { VITE_POTTER_BASE } from "@/services/config";
 
 export interface BookState {
   books: BookInterface[];
@@ -28,14 +29,26 @@ export const fetchBooks = createAsyncThunk(
       return fetch(`${VITE_POTTER_BASE}/${locale}/books`)
         .then((response) => {
           if (!response.ok) {
-            reject(new Error(`Failed to fetch, status code: [${response.status}]`));
-          }else {
+            reject(
+              new Error(`Failed to fetch, status code: [${response.status}]`)
+            );
+          } else {
             return response.json();
           }
         })
         .then((books) => resolve(books))
         .catch((error) => rejectWithValue(error.message));
     }).catch((error) => rejectWithValue(error.message));
+  }
+);
+
+export const fetchBooksFavs = createAsyncThunk(
+  "books/fetchFavs",
+  async (userId: string, { rejectWithValue }) => {
+    return fetchFavs<number[]>(
+      `users/${userId}/books`,
+      rejectWithValue
+    ).catch((error) => rejectWithValue(error.message));
   }
 );
 
@@ -48,6 +61,9 @@ const housesSlice = createSlice({
       aux.push(action.payload);
       state.favs = aux;
       console.log(state.favs);
+    },
+    setFavs: (state, action: PayloadAction<number[]>) => {
+      state.favs = action.payload;
     },
   },
   extraReducers(builder) {
@@ -66,14 +82,22 @@ const housesSlice = createSlice({
     builder.addCase(
       fetchBooks.rejected,
       (state, action: PayloadAction<SerializedError>) => {
-        console.log(action)
+        console.log(action);
         state.loading = false;
         state.error = action.payload;
       }
     );
+
+    builder.addCase(fetchBooksFavs.fulfilled, (state, action) => {
+      state.favs = action.payload;
+      state.loading = false;
+      state.error = null;
+      console.log("favs", action.payload);
+    }
+    );
   },
 });
 
-export const { addFav } = housesSlice.actions;
+export const { addFav, setFavs } = housesSlice.actions;
 
 export default housesSlice.reducer;

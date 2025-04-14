@@ -40,4 +40,8 @@ export class FirebaseAuthService implements AuthServiceInterface {
 
     return this.databaseService.getUserRoles(user.uid);
   }
+
+  async getUserData(user: any): Promise<any> {
+    return this.databaseService.getUserData(user.uid);
+  }
 }
