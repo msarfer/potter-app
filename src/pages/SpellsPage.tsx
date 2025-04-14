@@ -57,7 +57,7 @@ export const Spell = ({ spell }: SpellProps) => {
         <CardContent className="text-balance p-0 h-full">
           <CardDescription className="text-sm text-muted-foreground flex flex-col gap-2">
             {spell.use}
-            <Button className="cursor-pointer size-10" onClick={handleToggleFav}>
+            <Button variant='outline' className="cursor-pointer size-10" onClick={handleToggleFav}>
               <Heart fill={`${favs.includes(spell.index) ? 'currentColor': 'none'}`}/>
             </Button>
           </CardDescription>

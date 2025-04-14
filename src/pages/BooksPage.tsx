@@ -64,7 +64,7 @@ export const Book = ({ book }: BookProps) => {
           <div className="h-1/4 pt-2">
             <h5>Publicación: <span>{book.releaseDate}</span></h5>
             <h5>Páginas: <span>{book.pages}</span></h5>
-            <Button className="cursor-pointer" onClick={handleToggleFav}>
+            <Button variant='outline' className="cursor-pointer" onClick={handleToggleFav}>
               <Heart fill={`${favs.includes(book.index) ? 'currentColor': 'none'}`}/>
             </Button>
           </div>

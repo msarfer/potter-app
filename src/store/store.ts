@@ -3,11 +3,13 @@ import usersReducer from "@/store/features/users/usersSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import booksReducer from './features/booksSlice';
 import spellsReducer from "./features/spellsSlice";
+import charactersReducer from "./features/charactersSlice";
 const store = configureStore({
   reducer : {
     books: booksReducer,
     users: usersReducer,
-    spells: spellsReducer
+    spells: spellsReducer,
+    characters: charactersReducer
   }
 })
 
