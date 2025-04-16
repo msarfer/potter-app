@@ -10,7 +10,8 @@ import { Route, Routes } from "react-router-dom";
 import LoginPage from "@/pages/LoginPage";
 import RegisterPage from "@/pages/RegisterPage";
 import NotFoundPage from "@/pages/NotFoundPage";
-import { ErrorBoundary } from "./components/ErrorBoundary";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import HousesPage from "@/pages/HousesPage";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="/books" element={<ProtectedRoute><BooksPage/></ProtectedRoute>} />
           <Route path="/characters" element={<ProtectedRoute><CharactersPage/></ProtectedRoute>} />
           <Route path="/spells" element={<ProtectedRoute><SpellsPage/></ProtectedRoute>} />
-          <Route path="/houses" element={<ProtectedRoute><BooksPage/></ProtectedRoute>} />
+          <Route path="/houses" element={<ProtectedRoute><HousesPage/></ProtectedRoute>} />
           <Route path="/dashboard" element={<AdminRoute><DashboardPage/></AdminRoute>} />
           <Route path="*" element={<NotFoundPage/>} />
         </Routes>

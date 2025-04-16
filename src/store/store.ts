@@ -4,12 +4,15 @@ import { configureStore } from "@reduxjs/toolkit";
 import booksReducer from './features/booksSlice';
 import spellsReducer from "./features/spellsSlice";
 import charactersReducer from "./features/charactersSlice";
+import housesReducer from "./features/housesSlice";
+
 const store = configureStore({
   reducer : {
     books: booksReducer,
     users: usersReducer,
     spells: spellsReducer,
-    characters: charactersReducer
+    characters: charactersReducer,
+    houses: housesReducer
   }
 })
 
