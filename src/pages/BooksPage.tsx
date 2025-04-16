@@ -5,7 +5,7 @@ import type { BookInterface } from "@/entities/potterApi"
 import { useAppDispatch, useAppSelector } from "@/hooks/useRtk"
 import { AuthContext } from "@/providers/AuthProvider"
 import { LanguageContext } from "@/providers/LanguageProvider"
-import { fetchBooks, fetchBooksFavs, updateBooksFavs } from "@/store/features/books/booksSlice"
+import { fetchBooks, fetchBooksFavs, updateBooksFavs } from "@/store/features/booksSlice"
 import { Heart } from "lucide-react"
 import { useCallback, useContext, useEffect } from "react"
 

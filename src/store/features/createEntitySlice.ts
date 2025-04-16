@@ -1,5 +1,5 @@
 
-import { createAsyncThunk, createSlice, PayloadAction, SerializedError } from "@reduxjs/toolkit";
+import { Action, createAsyncThunk, createSlice, PayloadAction, SerializedError } from "@reduxjs/toolkit";
 import { VITE_POTTER_BASE } from "@/services/config";
 import { fetchFavs, updateFavs } from "@/services/firebase";
 
@@ -70,8 +70,7 @@ export function createEntitySlice<T>(entityName: string, endpoint: string) {
         state.loading = true;
         state.error = null;
       });
-      builder.addCase(fetchEntities.fulfilled, (state, action: PayloadAction<T[]>) => {
-        console.log("fetch entities", action.payload);
+      builder.addCase(fetchEntities.fulfilled, (state, action: PayloadAction<T[]> | Record<any,any>) => {
         state.items = action.payload;
         state.loading = false;
         state.error = null;
@@ -85,8 +84,10 @@ export function createEntitySlice<T>(entityName: string, endpoint: string) {
         state.loading = false;
         state.error = null;
       });
-      builder.addCase(updateEntitiesFavs.fulfilled, (state, action: PayloadAction<number[]>) => {
-        state.favs = action.payload;
+      builder.addCase(updateEntitiesFavs.fulfilled, (state, action: PayloadAction<number[] | Record<any, any>>) => {
+        if (Array.isArray(action.payload)) {
+          state.favs = action.payload;
+        }
       });
     },
   });
