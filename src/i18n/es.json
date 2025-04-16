@@ -11,6 +11,9 @@
   "app.lang.es": "Español",
   "app.signup.msg": "Introduce las credenciales con las que te quieres registrar",
   "app.login.msg": "Introduce las credenciales con las que quieres iniciar sesión",
-  "app.login.notAccount": "¿No tienes cuenta?"
-
+  "app.login.notAccount": "¿No tienes cuenta?",
+  "notfound.404": "404 - Página No Encontrada",
+  "notfound.title": "Parece que te has perdido en el Bosque Prohibido...",
+  "notfound.description": "O tal vez la página que buscas ha desaparecido como por arte de magia.",
+  "notfound.button": "Regresar a Hogwarts"
 }

@@ -9,6 +9,7 @@ import SpellsPage from "@/pages/SpellsPage";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "@/pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/spells" element={<ProtectedRoute><SpellsPage/></ProtectedRoute>} />
           <Route path="/houses" element={<ProtectedRoute><BooksPage/></ProtectedRoute>} />
           <Route path="/dashboard" element={<AdminRoute><DashboardPage/></AdminRoute>} />
+          <Route path="*" element={<NotFoundPage/>} />
         </Routes>
       </section>
     </main>

@@ -11,5 +11,9 @@
   "app.lang.es": "Spanish",
   "app.signup.msg": "Enter your email below to signup to your account",
   "app.login.msg": "Enter your email below to login to your account",
-  "app.login.notAccount": "Don't have an account?"
+  "app.login.notAccount": "Don't have an account?",
+  "notfound.404": "404 - Page Not Found",
+  "notfound.title": "It seems you've wandered into the Forbidden Forest...",
+  "notfound.description": "Or maybe the page you're looking for has vanished like magic.",
+  "notfound.button": "Return to Hogwarts"
 }
