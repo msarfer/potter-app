@@ -18,7 +18,7 @@ const AppProvider = buildProvidersTree([
 ])
 
 createRoot(document.getElementById('root')!).render(
-    <AppProvider>
-      <App />
-    </AppProvider>
+  <AppProvider>
+    <App />
+  </AppProvider>
 )

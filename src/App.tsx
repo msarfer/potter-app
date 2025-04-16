@@ -8,14 +8,16 @@ import HomePage from "@/pages/HomePage";
 import SpellsPage from "@/pages/SpellsPage";
 import { Route, Routes } from "react-router-dom";
 import LoginPage from "@/pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import NotFoundPage from "./pages/NotFoundPage";
+import RegisterPage from "@/pages/RegisterPage";
+import NotFoundPage from "@/pages/NotFoundPage";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 function App() {
   return (
     <main className="h-screen w-screen">
       <Navbar/>
       <section className="h-9/10 w-full p-10 box-border scroll-smooth overflow-auto">
+      <ErrorBoundary fallback={<div>Something went wrong</div>}>
         <Routes>
           <Route index element={<HomePage/>} />
           <Route path="/login" element={<LoginPage/>} />
@@ -27,6 +29,7 @@ function App() {
           <Route path="/dashboard" element={<AdminRoute><DashboardPage/></AdminRoute>} />
           <Route path="*" element={<NotFoundPage/>} />
         </Routes>
+      </ErrorBoundary>
       </section>
     </main>
   );
