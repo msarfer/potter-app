@@ -41,34 +41,38 @@ export const Character = ({ character }: CharacterProps) => {
         alt={character.fullName}
         className="h-full w-1/2 object-fit rounded-tl-lg"
       />
-      <CardHeader className="w-1/2 p-4">
+      <CardHeader className="w-1/2 p-4 h-full">
         <CardTitle>
           <h3 className="text-accent-foreground">{character.fullName}</h3>
         </CardTitle>
-        <CardContent className="text-balance p-0 h-full">
-          <div className="h-1/4 pt-2">
+        <CardContent className="text-balance p-0 h-full flex flex-col justify-between">
+          <header>
             <h5>
               <FormattedMessage id="character.birth" />:{" "}
               <span>{character.birthdate}</span>
             </h5>
             <h5>
               <FormattedMessage id="character.house" />:
-              <Badge variant="outline" style={{ color, backgroundColor }}>
+              <Badge
+                variant="outline"
+                className="ml-2"
+                style={{ color, backgroundColor }}
+              >
                 {character.hogwartsHouse}
               </Badge>
             </h5>
-            <Button
-              variant="outline"
-              className="cursor-pointer"
-              onClick={handleToggleFav}
-            >
-              <Heart
-                fill={`${
-                  favs.includes(character.index) ? "currentColor" : "none"
-                }`}
-              />
-            </Button>
-          </div>
+          </header>
+          <Button
+            variant="outline"
+            className="cursor-pointer mt-2"
+            onClick={handleToggleFav}
+          >
+            <Heart
+              fill={`${
+                favs.includes(character.index) ? "currentColor" : "none"
+              }`}
+            />
+          </Button>
         </CardContent>
       </CardHeader>
     </Card>
