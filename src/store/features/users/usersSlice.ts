@@ -34,7 +34,7 @@ export const fetchUsers = createAsyncThunk("users/fetchUsers", async (_, { rejec
       itemsRef,
       (snapshot) => {
         const data = snapshot.val();
-        console.log(data)
+
         if (data) {
           const users = formatRoles(data);
           resolve(users);
@@ -94,7 +94,6 @@ export const menuSlice = createSlice({
       (state, action: PayloadAction<UserEntry>) => {
         const user = action.payload;
         state.user = user;
-        console.log("Información del usuario", user);
       })
   }
 });

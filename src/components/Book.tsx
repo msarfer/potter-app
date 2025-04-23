@@ -20,7 +20,7 @@ interface BookProps {
 export const Book = ({ book }: BookProps) => {
   const { favs } = useAppSelector((state) => state.books);
   const { user } = useContext(AuthContext);
-  console.log(user.uid);
+
   const dispatch = useAppDispatch();
   const handleToggleFav = useCallback(() => {
     const newFavs = favs.includes(book.index)

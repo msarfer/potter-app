@@ -3,17 +3,17 @@ import { AuthContext } from "@/providers/AuthProvider";
 import { Navigate } from "react-router-dom";
 
 interface ProtectedRouteProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({children}) => {
-  const { user } = useContext(AuthContext)
-  console.log(user)
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+  const { user } = useContext(AuthContext);
+
   if (!user) {
-    return <Navigate to="/login" replace/>
+    return <Navigate to="/login" replace />;
   }
 
-  return children
-}
+  return children;
+};
 
-export default ProtectedRoute
+export default ProtectedRoute;
