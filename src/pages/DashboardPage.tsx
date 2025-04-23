@@ -1,10 +1,20 @@
 import { RolSelector } from "@/components/RolSelector";
-import { fetchUsers } from "@/store/features/users/usersSlice";
-import { useAppDispatch, useAppSelector } from "@/hooks/useRtk";
-import { useEffect } from "react";
-import { removeUser } from "@/services/firebase";
 import { Button } from "@/components/ui/button";
-import { Cross, Trash } from "lucide-react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRtk";
+import { firebaseDatabaseService } from "@/services/auth/firebase/FirebaseDatabaseService";
+import { fetchUsers } from "@/store/features/users/usersSlice";
+import { Trash } from "lucide-react";
+import { useEffect } from "react";
 
 export default function DashboardPage() {
   const { users } = useAppSelector((state) => state.users);
@@ -15,8 +25,7 @@ export default function DashboardPage() {
   }, []);
 
   const handleRemove = async (id: string) => {
-    await removeUser(id);
-    dispatch(fetchUsers());
+    await firebaseDatabaseService.restoreUserAppData(id);
   };
 
   return (
@@ -37,19 +46,55 @@ export default function DashboardPage() {
               : [];
             return (
               <tr key={id}>
-                <th scope="row" className="p-5 text-start">{email}</th>
+                <th scope="row" className="p-5 text-start">
+                  {email}
+                </th>
                 <td className="p-5 text-white">
-                  <div style={{display: 'flex', gap: '1rem'}}>
+                  <div style={{ display: "flex", gap: "1rem" }}>
                     {activeRoles?.map(([rol]) => (
-                      <kbd className="rounded p-1" style={{backgroundColor: '#017FC0', textTransform: 'capitalize'}} key={`${id}-${rol}`}>{rol.toLocaleLowerCase()}</kbd>
+                      <kbd
+                        className="rounded p-1"
+                        style={{
+                          backgroundColor: "#017FC0",
+                          textTransform: "capitalize",
+                        }}
+                        key={`${id}-${rol}`}
+                      >
+                        {rol.toLocaleLowerCase()}
+                      </kbd>
                     ))}
                   </div>
                 </td>
                 <td className="p-5 flex flex-row gap-1">
-                  <RolSelector user={user} initActiveRoles={activeRoles}/>
-                  <Button className="hover:cursor-pointer hover:text-red-200" onClick={() => handleRemove(user.id)}>
-                    <Trash/>
-                  </Button>
+                  <RolSelector user={user} initActiveRoles={activeRoles} />
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button className="hover:cursor-pointer hover:text-red-300">
+                        Restaurar favoritos
+                        <Trash />
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Are you absolutely sure?</DialogTitle>
+                        <DialogDescription>
+                          This action cannot be undone. This will permanently
+                          delete your account and remove your data from our
+                          servers.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <DialogFooter>
+                        <DialogClose asChild>
+                          <Button variant="outline">Cancel</Button>
+                        </DialogClose>
+                        <DialogClose asChild>
+                          <Button onClick={() => handleRemove(user.id)}>
+                            Confirm
+                          </Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                 </td>
               </tr>
             );
