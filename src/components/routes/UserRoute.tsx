@@ -1,5 +1,4 @@
 import { AuthContext } from "@/providers/AuthProvider";
-import { Rol } from "@/services/auth/AuthServiceInterface";
 import React, { ReactNode, useContext } from "react";
 import { Navigate } from "react-router-dom";
 

@@ -25,13 +25,12 @@ export function RegisterForm({
   const [error, setError] = useState<string>("");
   const [success, setSuccess] = useState<string>("");
   const navigate = useNavigate();
-  
+
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     try {
       const userCredential = await authService.signUp(email, password);
-      console.log("Usuario registrado:", userCredential.user);
       await firebaseDatabaseService.setUserRoles(userCredential.user.uid, {
         email: userCredential.user.email,
         roles: [Rol.USER],
@@ -52,10 +51,10 @@ export function RegisterForm({
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">
-              <FormattedMessage id='navbar.link.signup'/>
+            <FormattedMessage id="navbar.link.signup" />
           </CardTitle>
           <CardDescription>
-            <FormattedMessage id='app.signup.msg'/>
+            <FormattedMessage id="app.signup.msg" />
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -85,7 +84,7 @@ export function RegisterForm({
                 />
               </div>
               <Button type="submit" className="w-full">
-                <FormattedMessage id='navbar.link.signup'/>
+                <FormattedMessage id="navbar.link.signup" />
               </Button>
               {error && <p className="text-red-400">{error}</p>}
               {success && <p className="text-green-700">{success}</p>}

@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,11 +8,10 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { authService } from "@/services/auth/AuthService";
-import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import { Link, useNavigate } from "react-router-dom";
 
 export function LoginForm({
   className,
@@ -23,13 +21,11 @@ export function LoginForm({
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
-  
+
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     try {
-      const userCredential = await authService.signIn(email, password);
-      console.log("Usuario autenticado:", userCredential.user);
       navigate("/dashboard");
     } catch (error: any) {
       console.error("Error al iniciar sesión:", error);
@@ -41,9 +37,11 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl"><FormattedMessage id='navbar.link.signin'/></CardTitle>
+          <CardTitle className="text-2xl">
+            <FormattedMessage id="navbar.link.signin" />
+          </CardTitle>
           <CardDescription>
-          <FormattedMessage id='app.login.msg'/>
+            <FormattedMessage id="app.login.msg" />
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -73,14 +71,14 @@ export function LoginForm({
                 />
               </div>
               <Button type="submit" className="w-full">
-                <FormattedMessage id='navbar.link.signin'/>
+                <FormattedMessage id="navbar.link.signin" />
               </Button>
               {error && <p className="error-message">{error}</p>}
             </div>
             <div className="mt-4 text-center text-sm">
-              <FormattedMessage id='app.login.notAccount'/>{" "}
+              <FormattedMessage id="app.login.notAccount" />{" "}
               <Link to="/signup" className="underline underline-offset-4">
-                <FormattedMessage id='navbar.link.signup'/>
+                <FormattedMessage id="navbar.link.signup" />
               </Link>
             </div>
           </form>
