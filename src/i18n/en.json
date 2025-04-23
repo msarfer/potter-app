@@ -15,5 +15,10 @@
   "notfound.404": "404 - Page Not Found",
   "notfound.title": "It seems you've wandered into the Forbidden Forest...",
   "notfound.description": "Or maybe the page you're looking for has vanished like magic.",
-  "notfound.button": "Return to Hogwarts"
+  "notfound.button": "Return to Hogwarts",
+  "houses.title": "Hogwarts Houses",
+  "houses.founder": "Founder",
+  "houses.animal": "Animal",
+  "character.birth":  "Birth date",
+  "character.house": "House"
 }
