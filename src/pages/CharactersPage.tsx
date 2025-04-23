@@ -25,7 +25,7 @@ export default function CharactersPage() {
 
   if (error) return <ErrorAlert message={error}></ErrorAlert>;
   return (
-    <section className="flex flex-wrap justify-center w-full h-full gap-x-12 gap-y-4">
+    <section className="flex flex-wrap justify-center w-full h-full gap-x-8 gap-y-4">
       {characters &&
         characters.map((character) => (
           <Character key={character.index} character={character} />

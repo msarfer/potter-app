@@ -43,19 +43,21 @@ export const Character = ({ character }: CharacterProps) => {
       />
       <CardHeader className="w-1/2 p-4 h-full">
         <CardTitle>
-          <h3 className="text-accent-foreground">{character.fullName}</h3>
+          <h3 className="text-accent-foreground text-xl">
+            {character.fullName}
+          </h3>
         </CardTitle>
         <CardContent className="text-balance p-0 h-full flex flex-col justify-between">
           <header>
-            <h5>
-              <FormattedMessage id="character.birth" />:{" "}
-              <span>{character.birthdate}</span>
+            <h5 className="flex flex-col">
+              <FormattedMessage id="character.birth" />
+              <span className="font-bold">{character.birthdate}</span>
             </h5>
-            <h5>
-              <FormattedMessage id="character.house" />:
+            <h5 className="flex flex-col">
+              <FormattedMessage id="character.house" />
               <Badge
                 variant="outline"
-                className="ml-2"
+                className="font-bold mt-1"
                 style={{ color, backgroundColor }}
               >
                 {character.hogwartsHouse}

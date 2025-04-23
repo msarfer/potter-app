@@ -14,20 +14,24 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { Label } from "@/components/ui/label";
+import { FormattedMessage } from "react-intl";
 
 export const RolSelector = ({ user, initActiveRoles }) => {
-  const initialRoles = initActiveRoles?.reduce((acc, [key, value]) => ({
-    ...acc,
-    [key]: value,
-  }), {});
-  
+  const initialRoles = initActiveRoles?.reduce(
+    (acc, [key, value]) => ({
+      ...acc,
+      [key]: value,
+    }),
+    {}
+  );
+
   const [roles, setRoles] = useState(initialRoles || {});
   const dispatch = useDispatch<AppDispatch>();
 
   const handleCheckboxChange = (rol: Rol, checked: boolean) => {
-    setRoles(prev => ({
+    setRoles((prev) => ({
       ...prev,
-      [rol]: checked
+      [rol]: checked,
     }));
   };
 
@@ -43,16 +47,22 @@ export const RolSelector = ({ user, initActiveRoles }) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="min-w-[200px] justify-start">
-            {selectedCount > 0 
-              ? `${selectedCount} roles seleccionados`
-              : "Selecciona los roles..."}
+            {selectedCount > 0 ? (
+              <>
+                {selectedCount} <FormattedMessage id="dashboard.roles.select" />
+              </>
+            ) : (
+              <FormattedMessage id="dashboard.roles.select.ph" />
+            )}
           </Button>
         </DropdownMenuTrigger>
-        
+
         <DropdownMenuContent className="w-[200px]">
-          <DropdownMenuLabel>Seleccionar roles</DropdownMenuLabel>
+          <DropdownMenuLabel>
+            <FormattedMessage id="dashboard.roles.select.ph" />
+          </DropdownMenuLabel>
           {Object.values(Rol)?.map((rol) => (
-            <DropdownMenuItem 
+            <DropdownMenuItem
               key={rol}
               onSelect={(e) => e.preventDefault()}
               className="focus:bg-accent/50"
@@ -61,7 +71,7 @@ export const RolSelector = ({ user, initActiveRoles }) => {
                 <Checkbox
                   id={rol}
                   checked={roles[rol] || false}
-                  onCheckedChange={(checked) => 
+                  onCheckedChange={(checked) =>
                     handleCheckboxChange(rol, !!checked)
                   }
                 />
@@ -76,10 +86,8 @@ export const RolSelector = ({ user, initActiveRoles }) => {
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
-      
-      <Button onClick={handleButton}>
-        Actualizar roles
-      </Button>
+
+      <Button onClick={handleButton}>Actualizar roles</Button>
     </div>
   );
 };

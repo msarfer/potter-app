@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "./ui/button";
 import { Heart } from "lucide-react";
+import { FormattedMessage } from "react-intl";
 
 interface BookProps {
   book: BookInterface;
@@ -42,19 +43,20 @@ export const Book = ({ book }: BookProps) => {
           <h3 className="text-accent-foreground">{book.title}</h3>
         </CardTitle>
         <CardContent className="text-balance p-0 h-full">
-          <CardDescription className="text-justify h-3/4 overflow-auto">
+          <CardDescription className="text-justify h-2/3 overflow-auto">
             {book.description}
           </CardDescription>
-          <div className="h-1/4 pt-2">
-            <h5>
-              Publicación: <span>{book.releaseDate}</span>
+          <div className="flex flex-col justify-evenly gap-4 h-1/3">
+            <h5 className="flex flex-col">
+              <FormattedMessage id="books.page" />{" "}
+              <span>{book.releaseDate}</span>
             </h5>
-            <h5>
-              Páginas: <span>{book.pages}</span>
+            <h5 className=" flex flex-col">
+              <FormattedMessage id="books.pub" /> <span>{book.pages}</span>
             </h5>
             <Button
               variant="outline"
-              className="cursor-pointer"
+              className="cursor-pointer w-full"
               onClick={handleToggleFav}
             >
               <Heart
