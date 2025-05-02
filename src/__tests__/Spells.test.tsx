@@ -2,37 +2,18 @@ import { Root } from "@/Root";
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
-describe("Renders main page correctly", async () => {
-  beforeEach(() => {
+describe("Navigate and renders pages correctly", async () => {
+  beforeEach(async () => {
     window.history.pushState({}, "", "/potter-app");
   });
 
-  it("Should render the page correctly", async () => {
-    render(<Root />);
-    const h1 = await screen.queryByText("Potter App");
-
-    expect(h1).not.toBeNull();
-  });
-
-  it("Should render the NotFound page correctly", async () => {
+  it("Should render houses page", async () => {
     render(<Root />);
 
-    const link = await screen.getAllByRole("link").at(-1);
-    await userEvent.click(link);
-
-    const h1 = await screen.queryByText(
-      "It seems you've wandered into the Forbidden Forest..."
-    );
-    expect(h1).not.toBeNull();
-  });
-
-  it("Should log in correctly", async () => {
-    render(<Root />);
-
-    const housesLink = await screen.getByRole("link", {
+    const loginLink = await screen.getByRole("link", {
       name: "Sign In",
     });
-    await userEvent.click(housesLink);
+    await userEvent.click(loginLink);
 
     const email = await screen.getByRole("textbox", { name: "Email" });
     const password = await screen.getByPlaceholderText("Password");
@@ -45,7 +26,16 @@ describe("Renders main page correctly", async () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
     });
 
-    const title = await screen.queryByText("Welcome to the Magic World");
+    const link = await screen.getByRole("link", {
+      name: "Spells",
+    });
+
+    await act(async () => {
+      await userEvent.click(link);
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+    });
+
+    const title = await screen.findByText("Accio");
     expect(title).not.toBeNull();
   });
 });

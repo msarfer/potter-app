@@ -26,7 +26,24 @@ export default function HomePage() {
           <HomeCard key={`home-card-${section}`} section={section} />
         ))}
       </div>
-      <HomeCard section="404" />
+      <Card className="hover:scale-103 hover:border-yellow-400 hover:transition-all hover:duration-100 transform transition bg-neutral-50 dark:bg-transparent">
+        <CardHeader className="h-1/2">
+          <CardTitle className="dark:text-gray-100">
+            <FormattedMessage id={`notfound.404`} />
+          </CardTitle>
+          <CardDescription>
+            <FormattedMessage id={`notfound.404`} />
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Link
+            to={`/dsaas`}
+            className="dark:text-gray-400 hover:text-yellow-400 dark:hover:text-yellow-400"
+          >
+            <FormattedMessage id="home.more" />
+          </Link>
+        </CardContent>
+      </Card>
     </main>
   );
 }
