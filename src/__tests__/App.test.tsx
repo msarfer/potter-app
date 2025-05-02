@@ -1,13 +1,16 @@
-import { describe, it, expect } from "vitest";
+import { Root } from "@/Root";
 import { render, screen } from "@testing-library/react";
-import App from "@/App.tsx";
+import { beforeEach, describe, expect, it } from "vitest";
 
 describe("Renders main page correctly", async () => {
+  beforeEach(() => {
+    window.history.pushState({}, "", "/potter-app/");
+  });
+
   it("Should render the page correctly", async () => {
-   
-    render(<App />);
-    const h1 = await screen.queryByText("Vite + React");
-   
+    render(<Root />);
+    const h1 = await screen.queryByText("Potter App");
+
     expect(h1).not.toBeNull();
   });
 });
