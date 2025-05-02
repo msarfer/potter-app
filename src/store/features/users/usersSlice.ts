@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { onValue, ref, off } from "firebase/database";
+import { UserEntry } from "@/entities/entities";
 import { db } from "@/services/firebase";
-import { UserData, UserEntry } from "@/entities/entities";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { off, onValue, ref } from "firebase/database";
 
 interface UserInterface {
   id: string

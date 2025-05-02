@@ -32,7 +32,7 @@ export const Book = ({ book }: BookProps) => {
   }, [favs]);
 
   return (
-    <Card className="p-0 m-0 flex flex-row overflow-hidden w-1/3">
+    <Card className="p-0 m-0 flex flex-row overflow-hidden w-5/12">
       <img
         src={book.cover}
         alt={book.title}
@@ -43,10 +43,10 @@ export const Book = ({ book }: BookProps) => {
           <h3 className="text-accent-foreground">{book.title}</h3>
         </CardTitle>
         <CardContent className="text-balance p-0 h-full">
-          <CardDescription className="text-justify h-2/3 overflow-auto">
+          <CardDescription className="text-justify h-2/4 overflow-auto">
             {book.description}
           </CardDescription>
-          <div className="flex flex-col justify-evenly gap-4 h-1/3">
+          <div className="flex flex-col justify-evenly gap-4 h-1/3 mt-5">
             <h5 className="flex flex-col">
               <FormattedMessage id="books.page" />{" "}
               <span>{book.releaseDate}</span>

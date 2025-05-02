@@ -11,15 +11,18 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRtk";
+import { AuthContext } from "@/providers/AuthProvider";
 import { firebaseDatabaseService } from "@/services/auth/firebase/FirebaseDatabaseService";
+import { clearHouse } from "@/store/features/houseSlice";
 import { fetchUsers } from "@/store/features/users/usersSlice";
 import { Trash } from "lucide-react";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { FormattedMessage } from "react-intl";
 
 export default function DashboardPage() {
   const { users } = useAppSelector((state) => state.users);
   const dispatch = useAppDispatch();
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -27,6 +30,7 @@ export default function DashboardPage() {
 
   const handleRemove = async (id: string) => {
     await firebaseDatabaseService.restoreUserAppData(id);
+    if (user.uid === id) dispatch(clearHouse());
   };
 
   return (

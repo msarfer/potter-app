@@ -1,7 +1,7 @@
 
-import { Action, createAsyncThunk, createSlice, PayloadAction, SerializedError } from "@reduxjs/toolkit";
 import { VITE_POTTER_BASE } from "@/services/config";
 import { fetchFavs, updateFavs } from "@/services/firebase";
+import { createAsyncThunk, createSlice, PayloadAction, SerializedError } from "@reduxjs/toolkit";
 
 interface BaseState<T> {
   items: T[];

@@ -3,11 +3,14 @@ import { WandSparkles } from "lucide-react";
 import { FormattedMessage } from "react-intl";
 import { NavLink, useNavigate } from "react-router-dom";
 import { LanguageSelector } from "./LanguageSelector";
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import { AuthContext } from "@/providers/AuthProvider";
 import { authService } from "@/services/auth/AuthService";
 import logger from "@/services/logging";
 import { Rol } from "@/services/auth/AuthServiceInterface";
+import { useAppDispatch, useAppSelector } from "@/hooks/useRtk";
+import { clearHouse, fetchUserHouse } from "@/store/features/houseSlice";
+import { ColorHouses } from "@/entities/potterApi";
 
 interface Element {
   path: string;
@@ -33,6 +36,16 @@ const NavElement = ({ path, name }: Element) => {
 export function Navbar() {
   const { user, roles } = useContext(AuthContext);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { house } = useAppSelector((state) => state.house);
+  useEffect(() => {
+    dispatch(fetchUserHouse(user?.uid));
+  }, [user]);
+
+  const { color, backgroundColor } = useMemo(
+    () => ColorHouses[house] || { color: "#000", backgroundColor: "#FFF" },
+    [house]
+  );
 
   const links = useMemo(
     () => [
@@ -54,6 +67,7 @@ export function Navbar() {
   const handleLogout = async () => {
     try {
       await authService.signOut();
+      dispatch(clearHouse());
       navigate("/login");
     } catch (error) {
       logger.error(`Error al cerrar sesión: ${error} `);
@@ -63,7 +77,7 @@ export function Navbar() {
   return (
     <header className="flex h-1/10 w-full shrink-0 items-center px-4 border-b-1">
       <NavLink to="/" className="mr-6 flex text-2xl">
-        <WandSparkles className="h-8 w-8 mr-3" />
+        <WandSparkles className="h-8 w-8 mr-3" style={{ color }} />
         <h1 className="">Potter App</h1>
       </NavLink>
       <nav className="ml-auto flex gap-6">

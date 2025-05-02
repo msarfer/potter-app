@@ -1,13 +1,16 @@
 import { Book } from "@/components/Book";
 import ErrorAlert from "@/components/ErrorAlert";
+import { TabsTrigger } from "@/components/ui/tabs";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRtk";
 import { AuthContext } from "@/providers/AuthProvider";
 import { LanguageContext } from "@/providers/LanguageProvider";
 import { fetchBooks, fetchBooksFavs } from "@/store/features/booksSlice";
-import { useContext, useEffect } from "react";
+import { Tabs, TabsContent, TabsList } from "@radix-ui/react-tabs";
+import { useContext, useEffect, useMemo } from "react";
+import { FormattedMessage } from "react-intl";
 
 export default function BooksPage() {
-  const { items: books, error } = useAppSelector((state) => state.books);
+  const { items: books, favs, error } = useAppSelector((state) => state.books);
   const { locale } = useContext(LanguageContext);
   const { user } = useContext(AuthContext);
   const dispatch = useAppDispatch();
@@ -18,10 +21,37 @@ export default function BooksPage() {
     dispatch(fetchBooksFavs(user.uid));
   }, [locale]);
 
+  //create a variable than contains the books that are in the favs array
+  const favsBooks = useMemo(
+    () => books.filter((book) => favs.includes(book.index)),
+    [books, favs]
+  );
+
   if (error) return <ErrorAlert message={error}></ErrorAlert>;
   return (
-    <section className="flex flex-wrap justify-center w-full h-full gap-x-12 gap-y-4">
-      {books && books.map((book) => <Book key={book.index} book={book} />)}
-    </section>
+    <Tabs defaultValue="all" className="w-full">
+      <TabsList className="grid w-full grid-cols-2">
+        <TabsTrigger value="all">
+          <FormattedMessage id="tabs.all" />
+        </TabsTrigger>
+        <TabsTrigger value="favs">
+          <FormattedMessage id="tabs.favs" />
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="all">
+        <section className="flex flex-wrap justify-around w-full h-full gap-x-1 gap-y-2 mt-8">
+          {books.map((item) => (
+            <Book key={item.index} book={item} />
+          ))}
+        </section>
+      </TabsContent>
+      <TabsContent value="favs">
+        <section className="flex flex-wrap justify-around w-full h-full gap-x-1 gap-y-2 mt-8">
+          {favsBooks.map((item) => (
+            <Book key={item.index} book={item} />
+          ))}
+        </section>
+      </TabsContent>
+    </Tabs>
   );
 }

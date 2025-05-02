@@ -19,6 +19,13 @@
   "favs.confirm": "Confirm",
   "favs.desc": "This action cannot be undone. This will permanently restore favourites items.",
   "favs.title": "Are you absolutely sure?",
+  "home.books": "Explore all the books in the saga.",
+  "home.characters": "Meet the most iconic characters.",
+  "home.description": "Immerse yourself in the world of Harry Potter, meet the characters, discover spells, and explore the Hogwarts houses.",
+  "home.houses": "Explore the Hogwarts houses and their values.",
+  "home.more": "See more",
+  "home.spells": "Discover the spells and how to use them.",
+  "home.title": "Welcome to the Magic World",
   "houses.animal": "Animal",
   "houses.founder": "Founder",
   "houses.title": "Hogwarts Houses",
@@ -33,5 +40,7 @@
   "notfound.404": "404 - Page Not Found",
   "notfound.button": "Return to Hogwarts",
   "notfound.description": "Or maybe the page you're looking for has vanished like magic.",
-  "notfound.title": "It seems you've wandered into the Forbidden Forest..."
+  "notfound.title": "It seems you've wandered into the Forbidden Forest...",
+  "tabs.all": "All",
+  "tabs.favs": "Favourites"
 }

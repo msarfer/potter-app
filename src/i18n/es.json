@@ -19,6 +19,13 @@
   "favs.confirm": "Confirmar",
   "favs.desc": "Esta acción no se puede deshacer. Esto restaurará permanentemente los elementos favoritos.",
   "favs.title": "¿Estás completamente seguro?",
+  "home.books": "Explora todos los libros de la saga.",
+  "home.characters": "Conoce a los personajes más icónicos.",
+  "home.description": "Sumérgete en el mundo de Harry Potter, conoce a los personajes, descubre hechizos y explora las casas de Hogwarts.",
+  "home.houses": "Explora las casas de Hogwarts y sus valores.",
+  "home.more": "Ver más",
+  "home.spells": "Descubre los hechizos y cómo usarlos.",
+  "home.title": "Bienvenido al Mundo Mágico",
   "houses.animal": "Animal",
   "houses.founder": "Fundador",
   "houses.title": "Casas de Hogwarts",
@@ -33,5 +40,7 @@
   "notfound.404": "404 - Página No Encontrada",
   "notfound.button": "Regresar a Hogwarts",
   "notfound.description": "O tal vez la página que buscas ha desaparecido como por arte de magia.",
-  "notfound.title": "Parece que te has perdido en el Bosque Prohibido..."
+  "notfound.title": "Parece que te has perdido en el Bosque Prohibido...",
+  "tabs.all": "Todos",
+  "tabs.favs": "Favoritos"
 }

@@ -5,6 +5,7 @@ import booksReducer from './features/booksSlice';
 import spellsReducer from "./features/spellsSlice";
 import charactersReducer from "./features/charactersSlice";
 import housesReducer from "./features/housesSlice";
+import houseReducer from "./features/houseSlice";
 
 const store = configureStore({
   reducer : {
@@ -12,7 +13,8 @@ const store = configureStore({
     users: usersReducer,
     spells: spellsReducer,
     characters: charactersReducer,
-    houses: housesReducer
+    houses: housesReducer,
+    house: houseReducer
   }
 })
 
