@@ -9,6 +9,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { authService } from "@/services/auth/AuthService";
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { Link, useNavigate } from "react-router-dom";
@@ -26,6 +27,7 @@ export function LoginForm({
     e.preventDefault();
     setError("");
     try {
+      await authService.signIn(email, password);
       navigate("/dashboard");
     } catch (error: any) {
       console.error("Error al iniciar sesión:", error);
