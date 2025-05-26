@@ -1,13 +1,18 @@
-import { Book } from "@/components/Book";
+//import { Book } from "@/components/Book";
 import ErrorAlert from "@/components/ErrorAlert";
+import { Spinner } from "@/components/Spinner";
 import { TabsTrigger } from "@/components/ui/tabs";
 import { useAppDispatch, useAppSelector } from "@/hooks/useRtk";
 import { AuthContext } from "@/providers/AuthProvider";
 import { LanguageContext } from "@/providers/LanguageProvider";
 import { fetchBooks, fetchBooksFavs } from "@/store/features/booksSlice";
 import { Tabs, TabsContent, TabsList } from "@radix-ui/react-tabs";
-import { useContext, useEffect, useMemo } from "react";
+import React, { Suspense, useContext, useEffect, useMemo } from "react";
 import { FormattedMessage } from "react-intl";
+
+const LazyBook = React.lazy(() =>
+  import("@/components/Book").then((module) => ({ default: module.Book }))
+);
 
 export default function BooksPage() {
   const { items: books, favs, error } = useAppSelector((state) => state.books);
@@ -40,16 +45,20 @@ export default function BooksPage() {
       </TabsList>
       <TabsContent value="all">
         <section className="flex flex-wrap justify-around w-full h-full gap-x-1 gap-y-2 mt-8">
-          {books.map((item) => (
-            <Book key={item.index} book={item} />
-          ))}
+          <Suspense fallback={<Spinner />}>
+            {books.map((item) => (
+              <LazyBook key={item.index} book={item} />
+            ))}
+          </Suspense>
         </section>
       </TabsContent>
       <TabsContent value="favs">
         <section className="flex flex-wrap justify-around w-full h-full gap-x-1 gap-y-2 mt-8">
-          {favsBooks.map((item) => (
-            <Book key={item.index} book={item} />
-          ))}
+          <Suspense fallback={<Spinner />}>
+            {favsBooks.map((item) => (
+              <LazyBook key={item.index} book={item} />
+            ))}
+          </Suspense>
         </section>
       </TabsContent>
     </Tabs>

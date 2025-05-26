@@ -1,3 +1,4 @@
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { Navbar } from "@/components/Navbar";
 import AdminRoute from "@/components/routes/AdminRoute";
 import ProtectedRoute from "@/components/routes/ProtectedRoute";
@@ -5,13 +6,12 @@ import BooksPage from "@/pages/BooksPage";
 import CharactersPage from "@/pages/CharactersPage";
 import DashboardPage from "@/pages/DashboardPage";
 import HomePage from "@/pages/HomePage";
+import HousesPage from "@/pages/HousesPage";
+import LoginPage from "@/pages/LoginPage";
+import NotFoundPage from "@/pages/NotFoundPage";
+import RegisterPage from "@/pages/RegisterPage";
 import SpellsPage from "@/pages/SpellsPage";
 import { Route, Routes } from "react-router-dom";
-import LoginPage from "@/pages/LoginPage";
-import RegisterPage from "@/pages/RegisterPage";
-import NotFoundPage from "@/pages/NotFoundPage";
-import { ErrorBoundary } from "@/components/ErrorBoundary";
-import HousesPage from "@/pages/HousesPage";
 import UserRoute from "./components/routes/UserRoute";
 
 function App() {
