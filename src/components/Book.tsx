@@ -48,11 +48,11 @@ export const Book = ({ book }: BookProps) => {
           </CardDescription>
           <div className="flex flex-col justify-evenly gap-4 h-1/3 mt-5">
             <h5 className="flex flex-col">
-              <FormattedMessage id="books.page" />{" "}
+              <FormattedMessage id="books.pub" />{" "}
               <span>{book.releaseDate}</span>
             </h5>
             <h5 className=" flex flex-col">
-              <FormattedMessage id="books.pub" /> <span>{book.pages}</span>
+              <FormattedMessage id="books.page" /> <span>{book.pages}</span>
             </h5>
             <Button
               variant="outline"
